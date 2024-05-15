@@ -244,21 +244,20 @@
           <xsl:variable name="testsFailedCount" select="count(testsFailedSet)" />
           <xsl:if test="$testsFailedSet">
             <table id="ReportsTable">
-              <caption>All Failed Tests</caption>
-
+              <caption>Failed Tests</caption>
               <tbody>
                 <tr>
-                  <td class="column1Failed"></td>
-                  <td class="Function">
-                    Faileds
-                  </td>
-                  <td class="Message" name="{generate-id(faileds)}Id">
-                    <xsl:value-of select="concat(testsFailedCount,' Tests')" />
-                  </td>
                   <td class="ex">
                     <div class="OpenMoreButton" onclick="ShowHide('{generate-id(faileds)}TestsContainer','{generate-id(faileds)}Button','Show Tests','Hide Tests');">
                       <div class="MoreButtonText" id="{generate-id(faileds)}Button">Hide Tests</div>
                     </div>
+                  </td>
+                  <td class="column1Failed"></td>
+                  <td class="Function">
+                    Failed
+                  </td>
+                  <td class="Message" name="{generate-id(faileds)}Id">
+                    <xsl:value-of select="concat(testsFailedCount,' Tests')" />
                   </td>
                 </tr>
                 <tr id="{generate-id(faileds)}TestsContainer" class="visibleRow">
@@ -271,8 +270,8 @@
                           <th scope="col" class="TestsTable" abbr="Status">Status</th>
                           <th scope="col" class="TestsTable" abbr="Test">Test</th>
                           <th scope="col" class="TestsTable" abbr="Message">Message</th>
-                          <th scope="col" class="TestsTable" abbr="Message">Owner</th>
-                          <th scope="col" class="TestsTable" abbr="Exception">Duration</th>
+                          <th scope="col" class="TestsTable" abbr="Owner">Owner</th>
+                          <th scope="col" class="TestsTable" abbr="Duration">Duration</th>
                         </tr>
                       </thead>
                       <tbody>
@@ -294,18 +293,17 @@
           <xsl:variable name="classSet" select="//t:TestMethod[generate-id(.)=generate-id(key('TestMethods', @className))]" />
           <xsl:variable name="classCount" select="count($classSet)" />
           <table id="ReportsTable">
-            <caption>All Tests Group By Classes</caption>
+            <caption>Tests by Classes</caption>
             <thead>
               <tr class="odd">
-                <th scope="col">Time</th>
+                <th scope="col" abbr="More">More</th>
                 <th scope="col" abbr="Status">Status</th>
                 <th scope="col" abbr="Test">
                   Classes <div class="NumberTag">
                     <xsl:value-of select="$classCount" />
                   </div>
                 </th>
-                <th scope="col" abbr="Message">Message</th>
-                <th scope="col" abbr="Exception">More</th>
+                <th scope="col" abbr="Count">Count</th>
               </tr>
             </thead>
             <tbody>
@@ -314,7 +312,11 @@
                 <xsl:variable name="testsSet" select="key('TestMethods', @className)" />
                 <xsl:variable name="testsCount" select="count($testsSet)" />
                 <tr>
-                  <th scope="row" class="column1">7/21/2014 10:56:45 PM</th>
+                  <td class="ex">
+                    <div class="OpenMoreButton" onclick="ShowHide('{generate-id(@className)}TestsContainer','{generate-id(@className)}Button','Show Tests','Hide Tests');">
+                      <div class="MoreButtonText" id="{generate-id(@className)}Button">Show Tests</div>
+                    </div>
+                  </td>
                   <td class="PackageStatus">
                     <canvas id="{generate-id(@className)}canvas" width="100" height="25">
                     </canvas>
@@ -324,11 +326,6 @@
                   </td>
                   <td class="Message" name="{generate-id(@className)}Id">
                     <xsl:value-of select="concat($testsCount,' Tests')" />
-                  </td>
-                  <td class="ex">
-                    <div class="OpenMoreButton" onclick="ShowHide('{generate-id(@className)}TestsContainer','{generate-id(@className)}Button','Show Tests','Hide Tests');">
-                      <div class="MoreButtonText" id="{generate-id(@className)}Button">Show Tests</div>
-                    </div>
                   </td>
                 </tr>
                 <tr id="{generate-id(@className)}TestsContainer" class="hiddenRow">
@@ -365,14 +362,14 @@
             </tbody>
           </table>
           <Table>
-            <caption>Five most slowest tests</caption>
+            <caption>Five Slowest Tests</caption>
             <thead>
               <tr class="odd">
                 <th scope="col">Time</th>
                 <th scope="col" abbr="Status">Status</th>
                 <th scope="col" abbr="Test">Test</th>
-                <th scope="col" abbr="Message">Owner</th>
-                <th scope="col" abbr="Message">Duration</th>
+                <th scope="col" abbr="Owner">Owner</th>
+                <th scope="col" abbr="Duration">Duration</th>
               </tr>
             </thead>
             <tbody>
