@@ -310,6 +310,7 @@
             </thead>
             <tbody>
               <xsl:for-each select="$classSet">
+                <xsl:sort select="@className" />
                 <xsl:variable name="testsSet" select="key('TestMethods', @className)" />
                 <xsl:variable name="testsCount" select="count($testsSet)" />
                 <tr>
